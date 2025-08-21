@@ -141,18 +141,9 @@ export default function Contact() {
               <div className="bg-card border border-border rounded-lg p-6">
                 <p className="text-muted-foreground mb-6">
                   Prefer to send a quick message? You can reach me directly via email or phone. 
-                  I typically respond within 24 hours during business days.
                 </p>
                 
                 <div className="space-y-4">
-                  <div>
-                    <h3 className="font-medium text-foreground mb-2">Best times to reach me:</h3>
-                    <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Monday - Friday: 9:00 AM - 6:00 PM (GMT+1)</li>
-                      <li>• Weekend: Limited availability</li>
-                    </ul>
-                  </div>
-                  
                   <div>
                     <h3 className="font-medium text-foreground mb-2">What I&apos;m looking for:</h3>
                     <ul className="text-sm text-muted-foreground space-y-1">
