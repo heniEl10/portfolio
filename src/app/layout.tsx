@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Hani El Khalfi - Full-Stack Developer & Data Scientist",
@@ -70,8 +59,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" type="image/x-icon" href="/images/avatar.jpg" />
+        <link rel="shortcut icon" type="image/x-icon" href="/images/avatar.jpg" />
+        <link rel="apple-touch-icon" href="/images/avatar.jpg" />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className="font-sans antialiased min-h-screen bg-background text-foreground"
       >
         <ThemeProvider
           attribute="class"

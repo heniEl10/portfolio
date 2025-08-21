@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
 import { Menu, X, Sun, Moon, Github, Linkedin, Mail } from "lucide-react";
+import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -15,16 +16,55 @@ const navigation = [
 
 export function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
+
+  // Prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Debug theme state
+  useEffect(() => {
+    console.log("Current theme:", theme);
+  }, [theme]);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
     <nav className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-foreground">
-              Hani El Khalfi
+            <Link href="/" className="flex items-center">
+              {theme === "dark" ? (
+                <Image
+                  src="/images/han1-logo-dark.png"
+                  alt="Hani El Khalfi Logo Dark"
+                  width={192}
+                  height={64}
+                  className="h-16 w-auto"
+                />
+              ) : theme === "light" ? (
+                <Image
+                  src="/images/han1-logo-light.png"
+                  alt="Hani El Khalfi Logo Light"
+                  width={192}
+                  height={64}
+                  className="h-16 w-auto"
+                />
+              ) : (
+                <Image
+                  src="/images/han1-logo-light.png"
+                  alt="Hani El Khalfi Logo Light"
+                  width={192}
+                  height={64}
+                  className="h-16 w-auto"
+                />
+              )}
             </Link>
           </div>
 
@@ -68,12 +108,20 @@ export function Navigation() {
               >
                 <Mail size={18} />
               </a>
+            </div>
+            
+            {/* Dark mode button - positioned at the end */}
+            <div className="ml-4 border-l border-border pl-4">
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                className="p-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                aria-label="Toggle dark mode"
               >
-                <Sun size={18} className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon size={18} className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                {theme === "dark" ? (
+                  <Sun size={18} className="transition-all" />
+                ) : (
+                  <Moon size={18} className="transition-all" />
+                )}
               </button>
             </div>
           </div>
@@ -133,12 +181,20 @@ export function Navigation() {
               >
                 <Mail size={20} />
               </a>
+            </div>
+            
+            {/* Mobile dark mode button - positioned at the end */}
+            <div className="flex items-center justify-center pt-4 border-t border-border mt-4">
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 text-muted-foreground hover:text-primary transition-colors"
+                className="p-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+                aria-label="Toggle dark mode"
               >
-                <Sun size={20} className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                <Moon size={20} className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+                {theme === "dark" ? (
+                  <Sun size={20} className="transition-all" />
+                ) : (
+                  <Moon size={20} className="transition-all" />
+                )}
               </button>
             </div>
           </div>
